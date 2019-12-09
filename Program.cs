@@ -9,7 +9,8 @@ namespace Wadloader
             Console.WriteLine("Press any key to begin output.");
             Console.ReadKey();
             var wad = Loader.Load("Doom2.wad");
-            Exporter.DeserializeToJsonOutput(wad);
+            wad.ExportFull();
+            wad.ExportTypeSum();
         }
     }
 }
