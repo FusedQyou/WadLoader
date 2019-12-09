@@ -10,8 +10,8 @@ namespace Wadloader
         public static Wad Load(string file)
         {
             string filePath = Helpers.InputPath + file;
-            if (!File.Exists(filePath))                { throw new Exception($"File {filePath} does not exist.");   }
-            if (Path.GetExtension(filePath) != ".wad") { throw new Exception($"File {filePath} is not a wadfile."); }
+            if (!File.Exists(filePath))                { throw new Exception($"File {file} does not exist.");   }
+            if (Path.GetExtension(filePath) != ".wad") { throw new Exception($"File {file} is not a wadfile."); }
             if (file.Length < 4)                       { throw new Exception($"Filesize ({file.Length}) must be more than 4 bytes."); }
 
             string outPutFile = Helpers.OutputPath + file;
@@ -24,11 +24,15 @@ namespace Wadloader
             {
                 using (BinaryReader reader = new BinaryReader(stream, Encoding.ASCII))
                 {
-                    byte[] signature = reader.ReadBytes(4);
+                    string signature = Encoding.UTF8.GetString(reader.ReadBytes(4)).ToLower();
+                    if (signature != "iwad" && signature != "pwad") {
+                        throw new Exception($"File {file} is not a wadfile.");
+                    }
+
                     int lumpCount = reader.ReadInt32();
                     int lumpListOffset = reader.ReadInt32();
 
-                    wad.Type = Encoding.UTF8.GetString(signature);
+                    wad.Type = signature;
                     wad.Size = stream.Length;
 
                     reader.BaseStream.Seek(lumpListOffset, SeekOrigin.Begin);
