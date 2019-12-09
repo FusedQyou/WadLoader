@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Wadloader
 {
-    public class Helpers
+    public static class Helpers
     {
         public static string InputPath = "Input/";
         public static string OutputPath = "Output/";

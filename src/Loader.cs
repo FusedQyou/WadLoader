@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Wadloader
 {
-    public class Loader
+    public static class Loader
     {
         public static Wad Load(string file)
         {
@@ -56,9 +56,9 @@ namespace Wadloader
                     Console.WriteLine($"Loaded {wad.Lumps.Count()} lumps.");
 
                     // Load lump types between marker positions
-                    wad = SetTypeBetweenMarkers(wad, "S", "sprite");
-                    wad = SetTypeBetweenMarkers(wad, "P", "patch");
-                    wad = SetTypeBetweenMarkers(wad, "F", "flat");
+                    wad.SetTypeBetweenMarkers("S", "sprite");
+                    wad.SetTypeBetweenMarkers("P", "patch");
+                    wad.SetTypeBetweenMarkers("F", "flat");
 
                     // Load standard lump types
                     foreach(Lump lump in wad.Lumps)
@@ -112,19 +112,19 @@ namespace Wadloader
             }
         }
 
-        static Wad SetTypeBetweenMarkers(Wad wad, string markerPrefix, string type)
+        static void SetTypeBetweenMarkers(this Wad wad, string markerPrefix, string type)
         {
             int startIndex = wad.Lumps.FindIndex(lump => lump.Name.ToLower() == $"{markerPrefix.ToLower()}_start");
             int endIndex = wad.Lumps.FindIndex(lump => lump.Name.ToLower() == $"{markerPrefix.ToLower()}_end");
 
             if (startIndex == -1 || endIndex == -1) {
                 Console.WriteLine($"{markerPrefix.ToUpper()}_START and {markerPrefix.ToUpper()}_END markers not found. Skipping.");
-                return wad;
+                return;
             }
 
             // Update types
             wad.Lumps.Skip(startIndex).Take(endIndex - startIndex).Select(lump => { lump.Type = type; return lump; }).ToList();
-            return wad;
+            return;
         }
     }
 }

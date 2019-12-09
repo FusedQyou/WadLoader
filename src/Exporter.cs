@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Wadloader
 {
-    public class Exporter
+    public static class Exporter
     {
         public static void DeserializeToJsonOutput(Wad wad)
         {
