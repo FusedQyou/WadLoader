@@ -8,7 +8,7 @@ namespace Wadloader
         {
             Console.WriteLine("Press any key to begin output.");
             Console.ReadKey();
-            var wad = Loader.Load("Doom2.wad");
+            var wad = Loader.Load("Ze29.wad");
             wad.ExportFull();
             wad.ExportTypeSum();
         }

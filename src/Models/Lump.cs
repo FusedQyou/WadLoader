@@ -26,5 +26,8 @@ namespace Wadloader
         /// <summary> The content of the lump. </summary>
         [JsonIgnore]
         public byte[] Content { get; set; }
+
+        public bool IsMarker ()
+            => this.Size == 0;
     }
 }

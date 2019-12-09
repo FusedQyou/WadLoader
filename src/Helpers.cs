@@ -22,7 +22,7 @@ namespace Wadloader
             { "blockmap", "map blockmap" },
             { "scripts", "map acs source code" },
             { "textmap", "UDMF map data" },
-            { "behaviour", "compiled acs" },
+            { "behavior", "compiled acs" },
             { "dialogue", "strife conversation data" },
             { "znodes", "map nodes" },
             { "endmap", "map end marker" },
