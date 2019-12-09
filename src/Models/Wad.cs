@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 
-namespace Wadloader.Models
+namespace Wadloader
 {
     public class Wad
     {
-        public Wad(string fileName)
+        public Wad(string fileName, string extension)
         {
             Name = fileName;
+            Extension = extension;
         }
 
         /// <summary> The file name of the wad. </summary>

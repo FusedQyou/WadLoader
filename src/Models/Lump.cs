@@ -1,4 +1,6 @@
-namespace Wadloader.Models
+using Newtonsoft.Json;
+
+namespace Wadloader
 {
     public class Lump
     {
@@ -10,7 +12,11 @@ namespace Wadloader.Models
         }
 
         public string Name { get; set; }
+        public string Type { get; set; }
         public int Adress { get; set; }
         public int Size { get; set; }
+
+        [JsonIgnore]
+        public byte[] Content { get; set; }
     }
 }
